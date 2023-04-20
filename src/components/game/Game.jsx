@@ -4,6 +4,7 @@ import styles from "./Game.module.css"
 
 import GameOption from "../gameOption/GameOption"
 import GameInfo from "../gameinfo/Gameinfo"
+import Score from "../score/Score"
 
 const winnerTable = [
   [0, 1, 2],
@@ -72,27 +73,30 @@ function Game () {
 
 
   return (
-    <div className={styles.gameContent}>
-     <div className={styles.game}>
-       {
-         gameState.map((value, pos) => 
-          <GameOption 
-           key={`game-opiton-pos-${pos}`}
-           status={value}
-           onClick={() => handleClick(pos)}
-           isWinner={verifyWinnerLine(pos)}
-           isDraw={draw}
-          />
-          )
-        }
-     </div>
-      <GameInfo 
-        currentPlayer={currentPlayer}
-        winner={winner}
-        onReset={handleReset}
-        isDraw={draw}
-      />
-    </div>
+    <>
+      <div className={styles.gameContent}>
+      <div className={styles.game}>
+        {
+          gameState.map((value, pos) => 
+            <GameOption 
+            key={`game-opiton-pos-${pos}`}
+            status={value}
+            onClick={() => handleClick(pos)}
+            isWinner={verifyWinnerLine(pos)}
+            isDraw={draw}
+            />
+            )
+          }
+      </div>
+        <GameInfo 
+          currentPlayer={currentPlayer}
+          winner={winner}
+          onReset={handleReset}
+          isDraw={draw}
+        />
+      </div>
+      <Score />
+    </>
 )
 }
 
