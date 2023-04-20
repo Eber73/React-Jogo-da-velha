@@ -1,4 +1,4 @@
-import GamePage from "../src/components/gamepage/gamepage"
+import GamePage from "../src/components/gamepage/GamePage"
 
 
 function HomePage ( ) {
