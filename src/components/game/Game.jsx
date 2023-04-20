@@ -19,10 +19,12 @@ const winnerTable = [
 
 function Game () {
   const [gameState, setGameState] = useState(Array(9).fill(0))
-  const [currentPlayer, setCurrentPlayer] = useState(1)
+  const [currentPlayer, setCurrentPlayer] = useState(-1)
   const [winner, setWinner] = useState(0)
   const [winnerLine, setWinnerLine] = useState([])
   const [draw, setDraw] = useState(false)
+  const [scoreO, setScoreO] = useState(0)
+  const [scoreX, setScoreX] = useState(0)
 
   const handleClick = (pos) => {
     if (gameState[pos] === 0 && winner === 0) {
@@ -36,9 +38,15 @@ function Game () {
     winnerTable.forEach((line) => {
       const values = line.map((pos) => gameState[pos])
       const sum = values.reduce((sum, value) => sum + value)
-      if (sum === 3 || sum === -3 ) {
+      if (sum === 3  ) {
         setWinner(sum / 3)
         setWinnerLine(line)
+        setScoreO(scoreO + 1)        
+      }
+      if (sum === -3 ) {
+        setWinner(sum / 3)
+        setWinnerLine(line)
+        setScoreX(scoreX + 1)
       }
     })
   }
@@ -95,7 +103,12 @@ function Game () {
           isDraw={draw}
         />
       </div>
-      <Score />
+      <Score 
+      scoreO={scoreO}
+      scoreX={scoreX}
+      />
+
+
     </>
 )
 }
